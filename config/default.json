@@ -1,0 +1,20 @@
+{
+  "application": {
+    "db": { 
+      "uri": "mongodb://mongodb:27017/node-starter-kit",
+      "authSource": "admin",
+      "user": "",
+      "password": "", 
+      "poolSize": 10,
+      "ssl": false,
+      "useNewUrlParser": true,
+      "useCreateIndex": true
+    },
+    "testCredentials": {
+      "email": "test.user1@test.com",
+      "password": "testPW1",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlY2Q5NjQ3ZTJjOGE4NTNkZTg3NGQzMSIsImZpcnN0TmFtZSI6IlRlc3QiLCJsYXN0TmFtZSI6IlVzZXIxIiwiZW1haWwiOiJ0ZXN0LnVzZXIxQHRlc3QuY29tIiwidXNlcm5hbWUiOiJ0ZXN0LXVzZXItb25lIiwic3RhdHVzIjoiYWN0aXZlIiwiaWF0IjoxNTkzOTk5MDI0LCJleHAiOjE1OTQ2MDM4MjR9.4lzfIS4gvrlEFjwvxu7VaHhuDeCHfPzCVtDjac4ZA40"
+    },
+    "baseURL": "http://localhost:3001"
+  }
+}

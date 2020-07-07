@@ -1,0 +1,11 @@
+FROM node:lts as builder
+
+RUN mkdir -p /transpile
+WORKDIR /transpile
+
+COPY ./.babelrc ./.eslintrc ./.prettierrc ./package*.json ./
+COPY ./.env.example ./.env
+COPY ./config ./config
+RUN npm install
+COPY ./src ./src
+RUN npm run lint
