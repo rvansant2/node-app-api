@@ -1,0 +1,58 @@
+version: '3.7'
+services:
+
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db-data/init:/docker-entrypoint-initdb.d/:delegated
+      - ./db-data:/data/db
+    logging:
+      options:
+        max-size: 10m
+
+  api-watch:
+    build:
+      context: ./
+      dockerfile: Dockerfile.watch
+    depends_on:
+      - mongodb
+    command: npm run watch
+    volumes:
+      - ./src:/transpile/src:consistent
+      - ./build:/transpile/build:consistent
+    logging:
+      options:
+        max-size: 10m
+
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - api-watch
+      - mongodb
+    env_file:
+      - .env.example
+    restart: on-failure
+    ports:
+      - 3001:3001
+    volumes:
+      - ./build:/api/build
+      - ./config:/api/config
+      - ./.babelrc:/api/.babelrc
+      - ./src/app-logs:/api/app-logs:consistent
+    logging:
+      options:
+        max-size: 10m
+
+volumes:
+  db-data: {}
+
+networks:
+  public:
+  private:
+    driver: bridge
+    internal: true
